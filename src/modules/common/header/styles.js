@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import {white} from "color-name";
 
 const theme = createMuiTheme({
     palette: {
@@ -19,6 +20,7 @@ const styles = {
     },
     menuButton: {
         marginRight: theme.spacing(2),
+        backgroundColor: white
     },
     title: {
         flexGrow: 1,
