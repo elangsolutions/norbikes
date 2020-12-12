@@ -10,8 +10,11 @@ import HeaderLinks from "../../components/Header/HeaderLinks.js";
 import Parallax from "../../components/Parallax/Parallax.js";
 
 import styles from "../../assets/jss/material/views/landingPage.js";
+import LandingBikeImage from "../../assets/img/products/bikes/foto1.jpg";
 
 const dashboardRoutes = [];
+
+
 
 const useStyles = makeStyles(styles);
 
@@ -32,7 +35,7 @@ export default function LandingPage(props) {
         }}
         {...rest}
       />
-      <Parallax filter image={require("assets/img/products/bikes/foto1.jpg")}>
+      <Parallax filter image={LandingBikeImage}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>

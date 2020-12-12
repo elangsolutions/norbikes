@@ -1,4 +1,4 @@
-import { container, title } from "assets/jss/material.js";
+import { container, title } from "../../../jss/material.js";
 
 const landingPageStyle = {
   container: {

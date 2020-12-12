@@ -6,7 +6,7 @@ import {
   successColor,
   warningColor,
   dangerColor
-} from "assets/jss/material.js";
+} from "../../material.js";
 
 const buttonStyle = {
   button: {

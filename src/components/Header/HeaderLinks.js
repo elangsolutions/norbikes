@@ -15,8 +15,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 import {Apps, CloudDownload, WhatsApp as WhatsAppIcon} from "@material-ui/icons";
 
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import Button from "components/CustomButtons/Button.js";
+import CustomDropdown from "../../components/CustomDropdown/CustomDropdown.js";
+import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material/components/headerLinksStyle.js";
 
