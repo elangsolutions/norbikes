@@ -1,14 +1,14 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-let app = express();
-const forceSsl = require('force-ssl-heroku');
+const enforce = require('express-sslify');
 
-app.use(forceSsl);
+const app = express();
+
 app.use(express.static(path.join(__dirname, 'build')));
 
-const port = process.env.PORT || '8080';
-app.set('port', port);
+app.use(enforce.HTTPS({ trustProtoHeader: true }))
 
-const server = http.createServer(app);
-server.listen(port, () => console.log(`Running on localhost: ${port}`));
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
+});
