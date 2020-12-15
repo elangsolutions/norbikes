@@ -16,6 +16,8 @@ import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "../../assets/jss/material/components/headerStyle.js";
 
+import BrandNorbikeTrnasparent from "../../assets/img/brand/norbike_transparent.png"
+
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
@@ -60,7 +62,7 @@ export default function Header(props) {
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
-  const brandComponent = <Button className={classes.title}>{brand}</Button>;
+  const brandComponent = <img src={BrandNorbikeTrnasparent} className={classes.brand}/>;
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>

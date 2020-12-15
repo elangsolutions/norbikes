@@ -35,6 +35,11 @@ const headerStyle = {
     position: "absolute",
     zIndex: "1100"
   },
+  brand: {
+    width: "330px",
+    height: "125px",
+
+  },
   fixed: {
     position: "fixed",
     zIndex: "1100"
@@ -58,7 +63,7 @@ const headerStyle = {
     borderRadius: "3px",
     textTransform: "none",
     color: "inherit",
-    padding: "8px 16px",
+    padding: "0px 16px",
     letterSpacing: "unset",
     "&:hover,&:focus": {
       color: "inherit",

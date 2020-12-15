@@ -12,9 +12,8 @@ import Parallax from "../../components/Parallax/Parallax.js";
 import styles from "../../assets/jss/material/views/landingPage.js";
 import LandingBikeImage from "../../assets/img/products/bikes/foto1.jpg";
 
+
 const dashboardRoutes = [];
-
-
 
 const useStyles = makeStyles(styles);
 

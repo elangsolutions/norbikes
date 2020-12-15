@@ -1,17 +1,12 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const enforce = require('express-sslify');
-
-const app = express();
+let app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-const port = process.env.PORT || '8080';
+const port = process.env.PORT || '4000';
 app.set('port', port);
 
-app.use(enforce.HTTPS({ trustProtoHeader: true }))
-
-http.createServer(app).listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
-});
+const server = http.createServer(app);
+server.listen(port, () => console.log(`Running on localhost: ${port}`));
