@@ -16,13 +16,15 @@ import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "../../assets/jss/material/components/headerStyle.js";
 
-import BrandNorbikeTrnasparent from "../../assets/img/brand/norbike_transparent.png"
+import BrandNorbikeTransparent from "../../assets/img/brand/norbike_transparent.png"
+import BrandNorbike from "../../assets/img/brand/norbike_black.png"
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
@@ -55,14 +57,14 @@ export default function Header(props) {
         .classList.remove(classes[changeColorOnScroll.color]);
     }
   };
-  const { color, rightLinks, leftLinks, brand, fixed, absolute } = props;
+  const { color, rightLinks, leftLinks, brand, fixed, absolute, root:isRoot = true } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
-  const brandComponent = <img src={BrandNorbikeTrnasparent} className={classes.brand}/>;
+  const brandComponent = <img src={isRoot ? BrandNorbikeTransparent : BrandNorbike} className={classes.brand}/>;
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
