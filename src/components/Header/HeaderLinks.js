@@ -1,29 +1,29 @@
-/*eslint-disable*/
-import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
-// react components for routing our app without refresh
+
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
-
-// @material-ui/core components
 import {makeStyles} from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
+import {List,ListItem,Tooltip} from "@material-ui/core";
 
-// @material-ui/icons
-import {Apps, CloudDownload, WhatsApp as WhatsAppIcon} from "@material-ui/icons";
 
-// core components
+import {Apps, WhatsApp as WhatsAppIcon} from "@material-ui/icons";
 import CustomDropdown from "../../components/CustomDropdown/CustomDropdown.js";
 import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material/components/headerLinksStyle.js";
+import useCategories from "../../hooks/category/useCategories";
+import {useDispatch} from "react-redux";
+import {actions} from "../../store/actions/categories";
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks(props) {
+const HeaderLinks = (props) => {
+    const {categories, loading} = useCategories("NORBIKE01");
     const classes = useStyles();
+
+    useEffect(() => {
+        useDispatch({ type: actions.SET_CATEGORIES , categories})
+    }, [loading])
+
     return (
         <List className={classes.list}>
             <ListItem className={classes.listItem}>
@@ -35,25 +35,14 @@ export default function HeaderLinks(props) {
                         color: "transparent"
                     }}
                     buttonIcon={Apps}
-                    dropdownList={[
-                        <Link to="/bikes" className={classes.dropdownLink}>
-                            Bicicletas
-                        </Link>,
-                        <Link to="/equipment" className={classes.dropdownLink}>
-                            Equipamiento
-                        </Link>,
-                        <Link to="/clothes" className={classes.dropdownLink}>
-                            Indumentaria
-                        </Link>, <Link to="/accesories" className={classes.dropdownLink}>
-                            Repuestos
-                        </Link>,
-                        <Link to="/used-bikes" className={classes.dropdownLink}>
-                            Usados
-                        </Link>
-                    ]}
+                    dropdownList={!loading && categories.map(cat =>
+                        (<Link to={`/${cat.code.toLowerCase()}`} className={classes.dropdownLink}>
+                            {cat.name}
+                        </Link>))
+                    }
                 />
             </ListItem>
-                {/*<Tooltip title="Delete">
+            {/*<Tooltip title="Delete">
           <IconButton aria-label="Delete">
             <DeleteIcon />
           </IconButton>
@@ -105,10 +94,12 @@ export default function HeaderLinks(props) {
                         href="https://api.whatsapp.com/send?phone=+5491153204728"
                         className={classes.navLink}
                     >
-                       <WhatsAppIcon />
+                        <WhatsAppIcon/>
                     </Button>
                 </Tooltip>
             </ListItem>
         </List>
     );
 }
+
+export default HeaderLinks
