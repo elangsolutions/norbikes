@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import {useParams} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import Header from "../../components/Header/Header";
@@ -28,9 +29,10 @@ const GridGalleryContainer = (props) => {
     const classes = useStyles();
 
     const {category} = useParams();
-    const categories = useSelector(state => state.categories);
-    const {subCategories} = categories.find(cat => cat.code === category);
+    const categories = useSelector(state => state.landingState.categories) ;
 
+    const {subCategories}  = categories.find(  cat => cat.code === category.toUpperCase());
+    debugger
     return (<>
         <Header root={false}/>
         <div className={classes.root}>

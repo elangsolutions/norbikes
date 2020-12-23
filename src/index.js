@@ -21,7 +21,7 @@ ReactDOM.render(
             <Router history={hist}>
                 <Switch>
                     <Route path="/" exact component={LandingPage}/>
-                    <Route path={"/bikes"} component={GridGaleryPage}/>
+                    <Route path={"/:category"} component={GridGaleryPage}/>
                 </Switch>
             </Router>
         </ApolloProvider>

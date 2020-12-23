@@ -1,9 +1,6 @@
 import {actions as actionTypes} from "../actions/categories";
 
-const initialState = {
-    categories: null,
-
-};
+const initialState = {categories:[]};
 
 export default (state = initialState, action) => {
 
@@ -13,9 +10,7 @@ export default (state = initialState, action) => {
         case actionTypes.SET_CATEGORIES:
             return {
                 ...state,
-                categories: {
-                    ...action.categories
-                }
+                categories : action.categories.map(cat=>cat)
             };
         default:
             return state;

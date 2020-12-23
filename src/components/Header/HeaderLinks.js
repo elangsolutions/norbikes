@@ -12,17 +12,19 @@ import Button from "../../components/CustomButtons/Button.js";
 import styles from "../../assets/jss/material/components/headerLinksStyle.js";
 import useCategories from "../../hooks/category/useCategories";
 import {useDispatch} from "react-redux";
-import {actions} from "../../store/actions/categories";
+import {storeCategories} from "../../store/actions/categories";
 
 const useStyles = makeStyles(styles);
 
 const HeaderLinks = (props) => {
     const {categories, loading} = useCategories("NORBIKE01");
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        useDispatch({ type: actions.SET_CATEGORIES , categories})
-    }, [loading])
+
+        storeCategories(dispatch,categories)
+    },[categories])
 
     return (
         <List className={classes.list}>

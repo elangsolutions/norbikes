@@ -3,7 +3,7 @@ export const actions = {
     SET_CATEGORIES:"SET_CATEGORIES",
 };
 
-export const setCategories = (dispatch,categories) => {
+export const storeCategories = (dispatch,categories) => {
     dispatch({
         type: actions.SET_CATEGORIES,
         categories: categories
