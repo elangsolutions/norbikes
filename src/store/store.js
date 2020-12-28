@@ -23,6 +23,6 @@ export const saveState = (key,state) => {
     }
 }
 
-const initialData = loadState('state');
+const initialData = loadState('landingState');
 
 export default createStore(rootReducer, initialData, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

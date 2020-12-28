@@ -10,10 +10,14 @@ import LandingPage from "./views/LandingPage/LandingPage.js";
 import GridGaleryPage from "./views/GridGaleryPage/GridGalleryContainer";
 import {ApolloProvider} from "@apollo/client";
 import {apolloClient} from "./apolloClient";
-import store from './store/store'
+import store, {saveState} from './store/store'
 
 const hist = createBrowserHistory();
 
+store.subscribe(function () {
+    let state = store.getState();
+    saveState('landingState', state)
+})
 
 ReactDOM.render(
     <Provider store={store}>
@@ -28,3 +32,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
+
+

@@ -31,8 +31,8 @@ const GridGalleryContainer = (props) => {
     const {category} = useParams();
     const categories = useSelector(state => state.landingState.categories) ;
 
-    const {subCategories}  = categories.find(  cat => cat.code === category.toUpperCase());
-    debugger
+    const {subCategories = []}  = _.find( categories, cat => cat.code === category.toUpperCase()) || {};
+
     return (<>
         <Header root={false}/>
         <div className={classes.root}>
