@@ -1,105 +1,67 @@
-
 import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-import {List,ListItem,Tooltip} from "@material-ui/core";
+import {List, ListItem, Tooltip, Button, ButtonGroup} from "@material-ui/core";
 
 
-import {Apps, WhatsApp as WhatsAppIcon} from "@material-ui/icons";
+import {Apps, ShoppingCart} from "@material-ui/icons";
 import CustomDropdown from "../../components/CustomDropdown/CustomDropdown.js";
-import Button from "../../components/CustomButtons/Button.js";
+import CustomButton from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material/components/headerLinksStyle.js";
 import useCategories from "../../hooks/category/useCategories";
 import {useDispatch} from "react-redux";
 import {storeCategories} from "../../store/actions/categories";
+import useWindowSize from "../../hooks/page/useWindowSize";
 
 const useStyles = makeStyles(styles);
 
 const HeaderLinks = (props) => {
     const {categories, loading} = useCategories("NORBIKE01");
+    const pageSize = useWindowSize();
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    const aria_label = pageSize.width < 1000 ? "split button" : "text primary button group";
+
+    debugger
+
     useEffect(() => {
 
-        storeCategories(dispatch,categories)
-    },[categories])
+        storeCategories(dispatch, categories)
+    }, [categories])
 
     return (
         <List className={classes.list}>
             <ListItem className={classes.listItem}>
-                <CustomDropdown
-                    noLiPadding
-                    buttonText="Productos"
-                    buttonProps={{
-                        className: classes.navLink,
-                        color: "transparent"
-                    }}
-                    buttonIcon={Apps}
-                    dropdownList={!loading && categories.map(cat =>
-                        (<Link to={`/${cat.code.toLowerCase()}`} className={classes.dropdownLink}>
-                            {cat.name}
-                        </Link>))
+                <ButtonGroup variant="text" color="primary" aria-label={aria_label}>
+                    {!loading && categories.map(cat =>
+                        (<Button>
+                            <Link to={`/${cat.code.toLowerCase()}`} className={classes.dropdownLink}>
+                                {cat.name}
+                            </Link>
+                        </Button>))
                     }
-                />
-            </ListItem>
-            {/*<Tooltip title="Delete">
-          <IconButton aria-label="Delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>*/}
-            <ListItem className={classes.listItem}>
-                <Tooltip
-                    id="instagram-facebook"
-                    title="Seguinos en facebook"
-                    placement={window.innerWidth > 959 ? "top" : "left"}
-                    classes={{tooltip: classes.tooltip}}
-                >
-                    <Button
-                        color="transparent"
-                        href="https://www.facebook.com/NorbikesTrek/"
-                        target="_blank"
-                        className={classes.navLink}
-                    >
-                        <i className={classes.socialIcons + " fab fa-facebook"}/>
-                    </Button>
-                </Tooltip>
+                </ButtonGroup>
             </ListItem>
             <ListItem className={classes.listItem}>
                 <Tooltip
-                    id="instagram-tooltip"
-                    title="Seguinos en instagram"
+                    id="shopping-cart"
+                    title="carrito de compras"
                     placement={window.innerWidth > 959 ? "top" : "left"}
                     classes={{tooltip: classes.tooltip}}
                 >
-                    <Button
-                        color="transparent"
-                        href="https://www.instagram.com/norbikes/"
-                        target="_blank"
-                        className={classes.navLink}
-                    >
-                        <i className={classes.socialIcons + " fab fa-instagram"}/>
-                    </Button>
-                </Tooltip>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-                <Tooltip
-                    id="instagram-tooltip"
-                    title="comunicate con nosotros"
-                    placement={window.innerWidth > 959 ? "top" : "left"}
-                    classes={{tooltip: classes.tooltip}}
-                >
-                    <Button
+                    <CustomButton
                         color="transparent"
                         target="_blank"
-                        href="https://api.whatsapp.com/send?phone=+5491153204728"
+                        href="/shoppingCart"
                         className={classes.navLink}
                     >
-                        <WhatsAppIcon/>
-                    </Button>
+                        <ShoppingCart/>
+                    </CustomButton>
                 </Tooltip>
             </ListItem>
+
         </List>
     );
 }

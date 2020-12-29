@@ -10,6 +10,7 @@ const QUERY_CATEGORY =   `query categories($client:String!){
     subCategories {
       code
       name
+      imageUrl
     }
   }
 }`

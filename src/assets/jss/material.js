@@ -7,7 +7,7 @@ const transition = {
 
 const containerFluid = {
   paddingRight: "15px",
-  paddingLeft: "15px",
+  paddingLeft: "25px",
   marginRight: "auto",
   marginLeft: "auto",
   width: "100%"
@@ -23,8 +23,8 @@ const container = {
   "@media (min-width: 992px)": {
     maxWidth: "960px"
   },
-  "@media (min-width: 1200px)": {
-    maxWidth: "1140px"
+  "@media (min-width: 1400px)": {
+    maxWidth: "1240px"
   }
 };
 
