@@ -105,7 +105,8 @@ const headerLinksStyle = theme => ({
       color: "white",
       textDecoration: "none",
       display: "block",
-      padding: "10px 20px"
+      padding: "10px 20px",
+      fontFamily: "Muli"
     }
   },
   ...tooltip,

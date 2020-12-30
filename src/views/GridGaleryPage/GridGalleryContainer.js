@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import Header from "../../components/Header/Header";
 import {makeStyles} from '@material-ui/core/styles';
-import {ExpandMore as ShopIcon} from '@material-ui/icons'
+import {AddBox as ShopIcon} from '@material-ui/icons'
 import {GridList, GridListTile, GridListTileBar, IconButton, ListSubheader} from "@material-ui/core";
 import Footer from "../../components/Footer/Footer";
 
@@ -18,7 +18,12 @@ const useStyles = makeStyles((theme) => ({
     },
     gridList: {
         width: 1800,
-        height: 750
+        height: 640,
+        '& span':{
+            fontFamily:"Muli",
+            fontSize: "1.8rem",
+            fontWeight:"bold"
+        }
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',

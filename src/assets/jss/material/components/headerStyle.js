@@ -54,7 +54,12 @@ const headerStyle = {
     flexWrap: "nowrap"
   },
   flex: {
-    flex: 1
+    flex: 1,
+    '& span':{
+      fontFamily: "Muli",
+      fontSize: "2rem",
+      fontWeight: "bold"
+    }
   },
   title: {
     ...defaultFont,

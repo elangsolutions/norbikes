@@ -1,16 +1,10 @@
-import React from "react";
-// nodejs library that concatenates classes
+import React, {useEffect, useState} from "react";
+import _ from 'lodash'
 import classNames from "classnames";
-// nodejs library to set properties for components
 import PropTypes from "prop-types";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Hidden from "@material-ui/core/Hidden";
-import Drawer from "@material-ui/core/Drawer";
+import {makeStyles} from "@material-ui/core/styles";
+import {AppBar, Toolbar, IconButton, Button, Hidden, Drawer} from "@material-ui/core";
+
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
@@ -19,13 +13,16 @@ import styles from "../../assets/jss/material/components/headerStyle.js";
 import BrandNorbikeTransparent from "../../assets/img/brand/norbike_transparent.png"
 import BrandNorbike from "../../assets/img/brand/norbike_black.png"
 
+import {useSelector} from "react-redux";
+import {useParams} from 'react-router-dom'
+
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
     }
@@ -57,14 +54,30 @@ export default function Header(props) {
         .classList.remove(classes[changeColorOnScroll.color]);
     }
   };
+
+  const {category} = useParams();
+
+  const categories = useSelector(state => state.landingState.categories) ;
+
+  let categoryName;
+
   const { color, rightLinks, leftLinks, brand, fixed, absolute, root:isRoot = true } = props;
+
+  if(!isRoot){
+    const {name}  = _.find( categories, cat => cat.code === category.toUpperCase()) || {};
+    categoryName = name
+  }
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
+
   const brandComponent = <img src={isRoot ? BrandNorbikeTransparent : BrandNorbike} className={classes.brand}/>;
+
+
+
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
@@ -78,6 +91,9 @@ export default function Header(props) {
             brandComponent
           )}
         </div>
+        {!isRoot && <div className={classes.flex}>
+          <span>{categoryName}</span>
+        </div>}
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>
