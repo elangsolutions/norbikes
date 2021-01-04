@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Switch, useLocation, useHistory} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 
 import LandingPage from "./views/LandingPage/LandingPage";
 import GridGalleryPage from "./views/GridGalleryPage/GridGalleryContainer";
@@ -8,9 +8,6 @@ import ProductGalleryPage from "./views/ProductGalleryPage/ProductGalleryContain
 
 const RouterApp = (props) => {
 
-    const {pathname} = useLocation();
-    const history = useHistory();
-    debugger;
 
     return (
         <Switch>
