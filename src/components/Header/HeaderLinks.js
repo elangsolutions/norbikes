@@ -24,10 +24,8 @@ const HeaderLinks = (props) => {
 
     const aria_label = pageSize.width < 1000 ? "split button" : "text primary button group";
 
-    debugger
 
     useEffect(() => {
-
         storeCategories(dispatch, categories)
     }, [categories])
 

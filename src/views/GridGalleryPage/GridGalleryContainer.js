@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import {useParams} from 'react-router-dom'
+import {useParams, Link, useRouteMatch} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import Header from "../../components/Header/Header";
 import {makeStyles} from '@material-ui/core/styles';
@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     gridList: {
         width: 1800,
         height: 640,
-        '& span':{
-            fontFamily:"Muli",
+        '& span': {
+            fontFamily: "Muli",
             fontSize: "1.8rem",
-            fontWeight:"bold"
+            fontWeight: "bold"
         }
     },
     icon: {
@@ -35,31 +35,36 @@ const GridGalleryContainer = (props) => {
     const classes = useStyles();
 
     const {category} = useParams();
-    const categories = useSelector(state => state.landingState.categories) ;
+    const { url } = useRouteMatch();
+    const categories = useSelector(state => state.landingState.categories);
 
-    const {subCategories = [] }  = _.find( categories, cat => cat.code === category.toUpperCase()) || {};
+    const {subCategories = []} = _.find(categories, cat => cat.code === category.toUpperCase()) || {};
+
+    debugger;
 
     return (<>
         <Header root={false}/>
         <div className={classes.root}>
-            <GridList cellHeight={480} className={classes.gridList}>
+            <GridList cellHeight={480} className={classes.gridList} spacing={1}>
                 {subCategories.map((tile) => (
                     <GridListTile key={tile.id}>
-                        <img src={tile.imageUrl} alt={tile.name} />
+                        <img src={tile.imageUrl} alt={tile.name}/>
                         <GridListTileBar
                             title={tile.title}
                             subtitle={<span>{tile.name}</span>}
                             actionIcon={
-                                <IconButton aria-label={`Mas articulos ${tile.name}`} className={classes.icon}>
-                                    <ShopIcon />
-                                </IconButton>
+                                <Link to={`${url}/${tile.code.toLowerCase()}`}>
+                                    <IconButton className={classes.icon}>
+                                        <ShopIcon/>
+                                    </IconButton>
+                                </Link>
                             }
                         />
                     </GridListTile>
                 ))}
             </GridList>
         </div>
-        <Footer />
+        <Footer/>
     </>)
 }
 

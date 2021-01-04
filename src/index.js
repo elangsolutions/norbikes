@@ -1,32 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createBrowserHistory} from "history";
-import {Route, Router, Switch} from "react-router-dom";
 import {Provider} from "react-redux";
-
-import "./assets/scss/material.scss";
-
-import LandingPage from "./views/LandingPage/LandingPage.js";
-import GridGaleryPage from "./views/GridGaleryPage/GridGalleryContainer";
+import {createBrowserHistory} from "history";
 import {ApolloProvider} from "@apollo/client";
 import {apolloClient} from "./apolloClient";
-import store, {saveState} from './store/store'
+import {Router} from "react-router-dom";
+import "./assets/scss/material.scss";
 
-const hist = createBrowserHistory();
+import store, {saveState} from './store/store'
+import RootRouter from './Router'
+
+
 
 store.subscribe(function () {
     let state = store.getState();
     saveState('landingState', state)
 })
 
+
+const hist = createBrowserHistory();
+
 ReactDOM.render(
     <Provider store={store}>
         <ApolloProvider client={apolloClient}>
             <Router history={hist}>
-                <Switch>
-                    <Route path="/" exact component={LandingPage}/>
-                    <Route path={"/:category"} component={GridGaleryPage}/>
-                </Switch>
+             <RootRouter/>
             </Router>
         </ApolloProvider>
     </Provider>,
