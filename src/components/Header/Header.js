@@ -55,7 +55,7 @@ export default function Header(props) {
     }
   };
 
-  const {category} = useParams();
+  const {category, subCatId} = useParams();
 
   const categories = useSelector(state => state.landingState.categories) ;
 
@@ -64,8 +64,9 @@ export default function Header(props) {
   const { color, rightLinks, leftLinks, brand, fixed, absolute, root:isRoot = true } = props;
 
   if(!isRoot){
-    const {name}  = _.find( categories, cat => cat.code === category.toUpperCase()) || {};
-    categoryName = name
+    const cat  = _.find( categories, cat => cat.code === category.toUpperCase()) || {};
+    const subCat = cat.subCategories.find(subCat => subCat.code === subCatId?.toUpperCase())
+    categoryName = `${cat.name} ${subCat ? "- "+subCat.name:""}`
   }
   const appBarClasses = classNames({
     [classes.appBar]: true,

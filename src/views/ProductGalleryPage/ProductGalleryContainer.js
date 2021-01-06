@@ -1,61 +1,54 @@
 import React from 'react'
-import {useParams} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
-import {Grid, Paper, Container, Typography} from "@material-ui/core";
-
+import {useParams} from 'react-router-dom';
+import {Grid, Paper } from "@material-ui/core";
+import ProductItem from "./ProductItem";
+import Header from "../../components/Header/Header";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        alignItems: 'row'
+    container:{
+        display:"flex",
+        flexFlow: "row nowrap"
+    },
+    rightContainer:{
+        display:"flex",
+        flexFlow: "row wrap",
+        justifyContent: "flex-start"
+    },
+    leftBar: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(1),
+            width: theme.spacing(16),
+            height: theme.spacing(16),
+        },
     },
     paper: {
-        padding: theme.spacing(1),
+        width:"350px",
+        height:"850px",
+        padding: theme.spacing(0),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
 }));
 
-const LeftContainer = () => {
-
-    return (<><Container>
-                 <Typography component="div" style={{backgroundColor: '#3c3f41', height: '100vh'}}/>
-                </Container>
-            </>)
-}
-
 const ProductGalleryContainer = (props) => {
+
     const {subCatId} = useParams()
 
     const classes = useStyles();
 
-    const FormRow = () => {
-
-        return (
-            <>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>item</Paper>
+    return (<> <Header root={false}/>
+                <Grid container className={classes.container}>
+                    <Grid className={classes.leftBar}>
+                        <Paper elevation={2} className={classes.paper}/>
+                    </Grid>
+                    <Grid container  className={classes.rightContainer}>
+                        {[{},{},{},{},{},{},{},{},{},{},{},{},{},{}].map(o =>(<ProductItem />))}
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>item</Paper>
-                </Grid>
-            </>
-        );
-    }
-
-    return (<>
-        <Grid container className={classes.root}>
-            <LeftContainer/>
-            <Grid container spacing={1}>
-                <Grid container item xs={3} spacing={1}>
-                    <FormRow/>
-                </Grid>
-            </Grid>
-        </Grid>
-    </>)
+            </>)
 }
 
 export default ProductGalleryContainer
