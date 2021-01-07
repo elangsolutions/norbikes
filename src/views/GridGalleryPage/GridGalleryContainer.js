@@ -10,15 +10,16 @@ import Footer from "../../components/Footer/Footer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        height:"100%",
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
-        overflow: 'hidden',
+        overflow: 'scroll',
         backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-        width: 1800,
-        height: 640,
+        width: '100%',
+        height: 540,
         '& span': {
             fontFamily: "Muli",
             fontSize: "1.8rem",
@@ -40,12 +41,10 @@ const GridGalleryContainer = (props) => {
 
     const {subCategories = []} = _.find(categories, cat => cat.code === category.toUpperCase()) || {};
 
-    debugger;
-
     return (<>
         <Header root={false}/>
         <div className={classes.root}>
-            <GridList cellHeight={480} className={classes.gridList} spacing={1}>
+            <GridList cellHeight={380} className={classes.gridList} spacing={1}>
                 {subCategories.map((tile) => (
                     <GridListTile key={tile.id}>
                         <img src={tile.imageUrl} alt={tile.name}/>

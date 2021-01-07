@@ -5,6 +5,7 @@ import {GridList, Grid, Paper } from "@material-ui/core";
 import ProductItem from "./ProductItem";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import useProducts from "../../hooks/product/useProducts";
 
 const useStyles = makeStyles((theme) => ({
     divContainer : {
@@ -38,6 +39,8 @@ const ProductGalleryContainer = (props) => {
 
     const {subCatId} = useParams()
 
+    const {products} = useProducts(subCatId);
+
     const classes = useStyles();
 
     return (<> <Header root={false}/>
@@ -47,7 +50,7 @@ const ProductGalleryContainer = (props) => {
                     </Grid>
                     <div className={classes.divContainer}>
                     <GridList  className={classes.rightContainer} spacing={2} cellHeight={"auto"}>
-                        {[{},{},{},{},{},{},{},{},{},{},{},{},{},{}].map(o =>(<ProductItem />))}
+                        {products.map( prod =>(<ProductItem  data={prod}/>))}
                     </GridList>
                     </div>
                 </Grid>
