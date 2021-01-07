@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import {Typography, ButtonBase, Paper, IconButton, Grid} from '@material-ui/core';
+import {AddShoppingCart as AddToCart} from "@material-ui/icons";
 import baseFoto from '../../assets/img/products/bikes/foto3.jpg';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,9 +9,9 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
         margin: 'auto',
-        maxWidth: 500,
+        maxWidth: 700,
     },
     image: {
         width: 228,
@@ -29,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const ProductGrid = ({data={}}) => {
 
     const {imageUrl,description, details, code, price} = data;
+
     const classes = useStyles();
 
     return (
@@ -52,6 +51,9 @@ const ProductGrid = ({data={}}) => {
                                 <Typography variant="body2" color="textSecondary">
                                     {code || "Sin cod"}
                                 </Typography>
+                                <IconButton>
+                                    <AddToCart />
+                                </IconButton>
                             </Grid>
                         </Grid>
                         <Grid item>

@@ -1,35 +1,36 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import {useParams} from 'react-router-dom';
-import {Grid, Paper } from "@material-ui/core";
+import {GridList, Grid, Paper } from "@material-ui/core";
 import ProductItem from "./ProductItem";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const useStyles = makeStyles((theme) => ({
+    divContainer : {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
+
+    },
     container:{
         display:"flex",
-        flexFlow: "row nowrap"
+        flexFlow: "row nowrap",
+        height: '100%'
     },
     rightContainer:{
-        display:"flex",
-        flexFlow: "row wrap",
-        justifyContent: "flex-start"
+        width: "100%",
+        height: "450px",
     },
     leftBar: {
         display: 'flex',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(1),
-            width: theme.spacing(16),
-            height: theme.spacing(16),
-        },
+        flexWrap: 'wrap'
     },
     paper: {
-        width:"350px",
-        height:"850px",
-        padding: theme.spacing(0),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
+        width:"250px",
+        height:"450px",
     },
 }));
 
@@ -40,14 +41,17 @@ const ProductGalleryContainer = (props) => {
     const classes = useStyles();
 
     return (<> <Header root={false}/>
-                <Grid container className={classes.container}>
+                <Grid container className={classes.container} >
                     <Grid className={classes.leftBar}>
                         <Paper elevation={2} className={classes.paper}/>
                     </Grid>
-                    <Grid container  className={classes.rightContainer}>
+                    <div className={classes.divContainer}>
+                    <GridList  className={classes.rightContainer} spacing={2} cellHeight={"auto"}>
                         {[{},{},{},{},{},{},{},{},{},{},{},{},{},{}].map(o =>(<ProductItem />))}
-                    </Grid>
+                    </GridList>
+                    </div>
                 </Grid>
+                <Footer/>
             </>)
 }
 
